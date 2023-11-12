@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 // setting the path routes
-app.use(require("./controllers/blog-routes"));
+app.use(require("./controllers/"));
 
 // starts the server to begin listening
 sequelize.sync({ force: false }).then(() => {
