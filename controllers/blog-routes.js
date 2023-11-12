@@ -1,5 +1,6 @@
 // defining the route
 const router = require("express").Router();
+const CurrentBlogs = require('../models/CurrentBlogs');
 
 const blogs = [
     {
@@ -13,13 +14,26 @@ const blogs = [
 
 // Get route for getting exisiting blogs
 router.get("/", async (req, res) => {
-  // connecting the routes to the correct templates using all.handlebars
-  res.render("all");
+    const blogData = await CurrentBlogs.findAll().catch((err) => {
+        res.json(err);
+    });
+    const blogs = blogData.map((blog) => blog.get({ plain: true }));
+    res.render("all", {blogs});
 });
 
 // Get a speicifc blog
-router.get('blogs/:num', async (req, res) => {
-    return res.render('blog', blogs[req.params.num - 1]);
-})
+router.get('blogs/:id', async (req, res) => {
+    try{
+        const blogData = await CurrentBlogs.findByPk(req.params.id);
+        if (!blogData) {
+            res.status(400).json({message: "No current blogs \u1F63F"});
+            return;
+        }
+        const blog = blogData.get({ plain: true });
+        res.render('blog', blog);
+    } catch (err) {
+        res.status(500).json(err);
+    };
+});
 
 module.exports = router;
