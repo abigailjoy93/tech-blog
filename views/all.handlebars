@@ -1,34 +1,20 @@
 <!-- blog site container -->
-<div class="blog-container">
-  <div class="card-header col-md-10">
-    <h2>
-      &#1F4BB Tech Blog
-    </h2>
-  </div>
-    <div>
-      <ol>
-        <li>
-          <!-- import data dynamically -->
-        </li>
-        <li>
-          <!-- import data dynamically -->
-        </li>
-        <li>
-          <!-- import data dynamically -->
-        </li>
-        <li>
-          <!-- import data dynamically -->
-        </li>
-        <li>
-          <!-- import data dynamically -->
-        </li>
-        <li>
-          <!-- import data dynamically -->
-        </li>
-        <li>
-          <!-- import data dynamically -->
-        </li>
-      </ol>
+<div class="site-container">
+    <div class="card-header col-md-10">
+        <h2>
+        Tech Blog
+        </h2>
     </div>
-  </div>
+    <div>
+        <h2>Blogs from the community</h2>
+        <ul>
+            {{#each blogs as |blog|}}
+            <li>
+                <!-- TODO: Make title a clickable link to the blog -->
+                <h3><a>{{blogs.blog_title}}</a></h3>
+                <p>{{blogs.blog_author}}</p>
+                <p>{{blogs.blog_date}}</p>
+            </li>
+        </ul>
+    </div>
 </div>

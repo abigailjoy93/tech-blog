@@ -16,9 +16,8 @@ app.engine("handlebars", handlebars.engine);
 app.set("view engine", "handlebars");
 // establishing the path from the current directory to public
 app.use(express.static(path.join(__dirname, "public")));
-// TODO: set the path routes once the controllers have been created
-// example from the lesson - update names as needed
-app.use(require("./controllers/dish-routes"));
+// setting the path routes
+app.use(require("./controllers/blog-routes"));
 
 // starts the server to begin listening
 app.listen(PORT, () => {
