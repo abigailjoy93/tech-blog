@@ -3,10 +3,10 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class CreateBlog extends Model {}
+class Blogs extends Model {}
 
-// Creating the model for creating blogs
-CreateBlog.init(
+// Creating the Blogs model
+Blogs.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -14,19 +14,19 @@ CreateBlog.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    createBlogTitle: {
+    blogTitle: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    createBlogContents: {
+    blogContents: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    createBlogAuthor: {
+    blogAuthor: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    createBlogDate: {
+    blogDate: {
       type: DataTypes.DATE,
       allowNull: false,
     },
@@ -35,8 +35,8 @@ CreateBlog.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: "createBlog",
+    modelName: "Blogs",
   }
 );
 
-module.exports = CreateBlog;
+module.exports = Blogs;
