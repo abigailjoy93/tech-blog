@@ -1,10 +1,10 @@
 // defining the route
 const router = require("express").Router();
-const CurrentBlogs = require("../models/CurrentBlogs");
+const Blogs = require("../models/Blogs");
 
 // Get route for getting exisiting blogs
 router.get("/", async (req, res) => {
-  const blogData = await CurrentBlogs.findAll().catch((err) => {
+  const blogData = await Blogs.findAll().catch((err) => {
     res.json(err);
   });
   const blogs = blogData.map((blog) => blog.get({ plain: true }));
@@ -12,15 +12,15 @@ router.get("/", async (req, res) => {
 });
 
 // Get a speicifc blog
-router.get("/currentBlogs/:id", async (req, res) => {
+router.get("/Blogs/:id", async (req, res) => {
   try {
-    const blogData = await CurrentBlogs.findByPk(req.params.id);
+    const blogData = await Blogs.findByPk(req.params.id);
     if (!blogData) {
-      res.status(400).json({ message: "No current blogs \u1F63F" });
+      res.status(404).json({ message: "No blogs \u1F63F" });
       return;
     }
     const blog = blogData.get({ plain: true });
-    res.render("currentBlogs", blog);
+    res.render("Blogs", blog);
   } catch (err) {
     res.status(500).json(err);
   }
