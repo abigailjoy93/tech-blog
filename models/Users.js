@@ -1,12 +1,12 @@
 // Establishing the model for current blogs
 // extract 'model' and 'datatypes from sequelize
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connection.js");
+const sequelize = require("../config/connection");
 
-class blogs extends Model {}
+class Users extends Model {}
 
-// Creating the Blogs model
-blogs.init(
+// Creating the Comments model
+Users.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -14,32 +14,24 @@ blogs.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    blogTitle: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    blogContents: {
-      type: DataTypes.TEXT,
+    password: {
+      type: DataTypes.STRING,
       allowNull: false,
-    },
-    blogAuthor: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'users',
-        key: 'id'
+      validate: {
+        len: [8]
       }
-    },
-    blogDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-  },
+    }
+  }, 
   {
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: "blogs",
+    modelName: "users",
   }
 );
 
-module.exports = blogs;
+module.exports = Users;
